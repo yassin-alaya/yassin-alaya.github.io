@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research — Yassin Alaya</title>
+<meta name="description" content="Working papers and work in progress by Yassin Alaya, Toulouse School of Economics.">
+<link rel="stylesheet" href="style.css">
+<!-- MathJax: lets you write maths in an abstract, delimited by \( ... \).
+     Delete these two lines if you never need maths on the page. -->
+<script>window.MathJax = {tex: {inlineMath: [['\\(','\\)']]}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1 class="name"><a href="index.html">Yassin Alaya</a></h1>
+  <p class="affil">Toulouse School of Economics</p>
+  <nav>
+    <a href="index.html">About</a>
+    <a href="research.html" aria-current="page">Research</a>
+    <a href="teaching.html">Teaching</a>
+    <a href="cv.pdf">CV</a>
+  </nav>
+</header>
+
+<main>
+
+  <section>
+    <h2>Working papers</h2>
+
+    <article class="paper">
+      <h3>
+        The Divide-and-Conquer Estimator for High-Dimensional Linear Regression
+        under Weak Exogeneity
+        <span class="tag">Job market paper</span>
+        <!-- TODO: change or delete the tag above. -->
+      </h3>
+      <!-- publish-paper.ps1 rewrites the text between the DAC_DATE
+           markers on every compile. Leave them in place. -->
+      <p class="meta">Working paper. Last revised <!--DAC_DATE-->6 September 2026<!--/DAC_DATE-->.</p>
+
+      <details class="abstract-toggle" open>
+        <summary>Abstract</summary>
+        <p class="abstract">
+          Under weak exogeneity, ordinary least squares is inconsistent when the
+          number of regressors is proportional to the sample size and regressors
+          are autocorrelated, as shown by Mikusheva and Sølvsten (2025). Their
+          consistent estimator relies on homoskedasticity. I propose the
+          Divide-and-Conquer (DaC) estimator, which is consistent under
+          heteroskedasticity when feedback from the error term to future
+          regressors has a known, finite horizon. The idea is simple: partition
+          the sample into subsamples, spaced so that strict exogeneity holds
+          within each, estimate OLS on every subsample, and average. The
+          resulting estimator is unbiased and consistent for linear contrasts of
+          the slope in the proportional regime. Asymptotic normality and
+          consistent variance estimation are established when the number of
+          regressors grows but remains a vanishing fraction of the sample size.
+          Simulations compare DaC, OLS, and the Mikusheva–Sølvsten estimator.
+        </p>
+      </details>
+
+      <p class="links">
+        <a href="papers/dac.pdf">PDF</a>
+        <!-- Add these back once the links exist:
+        <a href="#">arXiv</a>
+        <a href="#">Slides</a>
+        <a href="#">Code</a>
+        -->
+      </p>
+    </article>
+
+  </section>
+
+  <section>
+    <h2>Work in progress</h2>
+    <article class="paper">
+      <h3>Title of the next project</h3>
+      <p class="meta">Draft available on request.</p>
+      <!-- TODO: replace or delete this placeholder entry. Copy the
+           <article class="paper"> block above for a full entry with an
+           abstract and links. -->
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <p>Last updated September 2026.</p>
+</footer>
+
+</div>
+</body>
+</html>
