@@ -48,30 +48,34 @@ Buy a domain (~$12/yr at Cloudflare or Namecheap), then:
 3. In the repo: Settings → Pages → set the custom domain and tick
    "Enforce HTTPS".
 
-## Auto-publishing the paper on every compile
+## Updating the paper
 
-`publish-paper.ps1` copies `../Latex/main.pdf` to `papers/dac.pdf`, stamps the
-"Last revised" date on `research.html`, commits, and pushes. It is wired into
-VS Code by `../Latex/.vscode/settings.json`, which adds a build recipe
-`latexmk -> publish` and makes it the default — so an ordinary build (including
-LaTeX Workshop's build-on-save) publishes.
+Automatic publishing on every compile is **off**. Update the paper when a
+version is polished enough, in either of these two ways.
 
-The script is deliberately quiet and safe to run constantly:
-
-- it compares the PDF's extracted *text*, not its bytes, so recompiling without
-  substantive changes publishes nothing;
-- it always exits 0, so a publishing problem never shows up as a failed build;
-- if the site has no git remote yet, it commits locally and says so.
-
-To compile without publishing, either pick the plain `latexmk` recipe from
-LaTeX Workshop's build menu, or swap the order of the two recipes in
-`.vscode/settings.json` (the first one is the default).
-
-To run it by hand instead:
+**Run the script** (does everything in one go):
 
     powershell -ExecutionPolicy Bypass -File publish-paper.ps1
 
-Two caveats. VS Code only reads `.vscode/settings.json` from the workspace
-root, so if you open a folder other than `Latex` as your workspace, move that
-file to that folder's `.vscode/`. And every published revision stays in git
-history forever — at ~550 KB per PDF that is fine for years, but it is not free.
+It copies `../Latex/main.pdf` to `papers/dac.pdf`, stamps the "Last revised"
+date on `research.html`, commits, and pushes. If the PDF's text has not changed
+since the published version, it does nothing and says so.
+
+**Or do it by hand:** copy `main.pdf` over `papers/dac.pdf`, edit the date
+between the `<!--DAC_DATE-->` markers in `research.html`, then:
+
+    git add . && git commit -m "Update paper" && git push
+
+### Turning automatic publishing back on
+
+Open `../Latex/.vscode/settings.json` and swap the two entries in
+`latex-workshop.latex.recipes` so that `latexmk -> publish` comes first.
+LaTeX Workshop uses the first recipe as the default, so every build — including
+build-on-save — will publish again. The file has a comment saying the same.
+
+Without swapping anything you can also publish a one-off build from
+Ctrl+Shift+P -> "LaTeX Workshop: Build with recipe" -> "latexmk -> publish".
+
+Note that VS Code only reads `.vscode/settings.json` from the workspace root,
+so if you open a folder other than `Latex` as your workspace, move that file to
+that folder's `.vscode/`.
