@@ -37,8 +37,8 @@ $changed = $true
 if ((Test-Path $target) -and (Get-Command pdftotext -ErrorAction SilentlyContinue)) {
     $a = Join-Path $env:TEMP 'publish-paper-new.txt'
     $b = Join-Path $env:TEMP 'publish-paper-old.txt'
-    pdftotext -q $source $a
-    pdftotext -q $target $b
+    pdftotext -q $source $a 2>$null
+    pdftotext -q $target $b 2>$null
     if ((Test-Path $a) -and (Test-Path $b)) {
         $ha = (Get-FileHash $a -Algorithm SHA256).Hash
         $hb = (Get-FileHash $b -Algorithm SHA256).Hash
