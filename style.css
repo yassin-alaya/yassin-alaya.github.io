@@ -208,3 +208,56 @@ footer {
   nav { gap: 0.9rem 1rem; }
   dl.contact > div { flex-direction: column; gap: 0; }
 }
+
+/* --- course list (teaching page) ------------------------------------ */
+/* Course on the left, years flush right — the \hfill layout of a CV. */
+
+p.note {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.4rem;
+}
+
+ul.courses {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.courses > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem 1.5rem;
+  flex-wrap: wrap;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  margin: 0;
+}
+
+ul.courses > li:last-child { border-bottom: none; }
+
+.course em {
+  font-style: italic;
+}
+
+.level {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-left: 0.5rem;
+  white-space: nowrap;
+}
+
+.years {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+@media (max-width: 34rem) {
+  ul.courses > li { gap: 0.15rem 1rem; }
+  .level { margin-left: 0; display: block; }
+  .years { margin-left: auto; }
+}
