@@ -2,23 +2,55 @@
 
 Plain HTML and one stylesheet. No build step, no dependencies.
 
-## Editing
+## How the site is put together
 
-Open the `.html` files in any editor. Every spot that needs your input is
-marked with a `TODO` comment. Search for `TODO` to find them all.
+It is a Jekyll site. GitHub builds it automatically on every push — there is
+nothing to install and no build command to run.
 
-- `index.html` — about, research interests, contact
-- `research.html` — papers; copy an `<article class="paper">` block to add one
-- `teaching.html` — courses
-- `style.css` — all styling; colours live in the `:root` block at the top
-- `papers/` — paper PDFs
-- `cv.pdf` — drop your CV here (the nav links to it)
+- `_layouts/default.html` — the shared skeleton: head, header, menu, footer.
+  Everything that appears on every page lives here, and only here.
+- `_data/nav.yml` — the menu. Add, remove or reorder entries here and all
+  pages follow. This is the one place the menu is defined.
+- `_config.yml` — site-wide settings: name, affiliation, description.
+- `index.html`, `research.html`, `teaching.html` — one page each. They contain
+  only that page's content, under a short front-matter block.
+- `style.css` — all styling; colours are variables in the `:root` block.
+- `papers/` — paper PDFs.
 
-To preview locally, double-click `index.html`, or run:
+### Front matter
 
-    python -m http.server 8000
+Every page starts with a block fenced by `---`:
 
-and open http://localhost:8000.
+    ---
+    layout: default
+    title: Research
+    mathjax: true
+    ---
+
+`layout: default` wraps the page in the shared skeleton. `title` sets the
+browser tab (omit it on the home page). `mathjax: true` loads MathJax, so you
+can write maths in the text as \( ... \); leave it out on pages that do not
+need it.
+
+### Adding a page
+
+Copy `teaching.html`, change the front matter and content, and add an entry to
+`_data/nav.yml`. Removing a page means deleting the file and its line in
+`nav.yml`. Either way you touch two files, never every page.
+
+### Previewing
+
+Opening the `.html` files directly in a browser no longer shows a finished
+page — the menu and header are added by GitHub at build time. Either push and
+look at the live site, or install Ruby and run Jekyll locally:
+
+    gem install jekyll bundler
+    jekyll serve
+
+which serves a live-reloading preview at http://localhost:4000.
+
+If a push does not appear on the live site, the build failed: check the
+Actions tab in the repository. GitHub also emails you when a build breaks.
 
 ## Publishing to GitHub Pages
 
@@ -57,18 +89,19 @@ version is polished enough, in either of these two ways.
 
     powershell -ExecutionPolicy Bypass -File publish-paper.ps1
 
-It copies `../Latex/main.pdf` to `papers/dac.pdf`, stamps the "Last revised"
+It copies the compiled `main.pdf` (path set by `$Source` at the top of the
+script, or pass `-Source <path>`) to `papers/main.pdf`, stamps the "Last revised"
 date on `research.html`, commits, and pushes. If the PDF's text has not changed
 since the published version, it does nothing and says so.
 
-**Or do it by hand:** copy `main.pdf` over `papers/dac.pdf`, edit the date
+**Or do it by hand:** copy `main.pdf` over `papers/main.pdf`, edit the date
 between the `<!--DAC_DATE-->` markers in `research.html`, then:
 
     git add . && git commit -m "Update paper" && git push
 
 ### Turning automatic publishing back on
 
-Open `../Latex/.vscode/settings.json` and swap the two entries in
+Open `.vscode/settings.json` in the LaTeX project folder and swap the two entries in
 `latex-workshop.latex.recipes` so that `latexmk -> publish` comes first.
 LaTeX Workshop uses the first recipe as the default, so every build — including
 build-on-save — will publish again. The file has a comment saying the same.
@@ -78,4 +111,6 @@ Ctrl+Shift+P -> "LaTeX Workshop: Build with recipe" -> "latexmk -> publish".
 
 Note that VS Code only reads `.vscode/settings.json` from the workspace root,
 so if you open a folder other than `Latex` as your workspace, move that file to
-that folder's `.vscode/`.
+that folder's `.vscode/`. The publish recipe there must call this script by its
+full path, `C:\Users\yrala\OneDrive\Documents\website\publish-paper.ps1`,
+since the website no longer sits next to the LaTeX folder.

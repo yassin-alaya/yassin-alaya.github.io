@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{%- comment -%}
+  The page title is "<page title> — Yassin Alaya", except on the home page,
+  which is just "Yassin Alaya". Set "title:" in a page's front matter.
+{%- endcomment -%}
+<title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+<meta name="description" content="{{ page.description | default: site.description }}">
+
+<link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+
+{%- if page.mathjax %}
+<!-- Loaded only on pages with "mathjax: true" in their front matter.
+     Lets you write maths in an abstract, delimited by \( ... \). -->
+<script>window.MathJax = {tex: {inlineMath: [['\\(','\\)']]}};</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{%- endif %}
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1 class="name"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+  <p class="affil">{{ site.affiliation }}</p>
+  <nav>
+    {%- for item in site.data.nav %}
+    <a href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.name }}</a>
+    {%- endfor %}
+  </nav>
+</header>
+
+<main>
+{{ content }}
+</main>
+
+<footer>
+  <p>Last updated {{ site.time | date: "%B %Y" }}.</p>
+</footer>
+
+</div>
+</body>
+</html>

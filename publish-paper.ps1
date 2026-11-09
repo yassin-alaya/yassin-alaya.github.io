@@ -10,12 +10,18 @@
   Or let the VS Code build recipe run it automatically. See README.md.
 #>
 
+param(
+    # The compiled paper. The website folder used to sit inside the paper
+    # project, so this was found as ../Latex/main.pdf. Since the move it has to
+    # be an explicit path: change it here if the paper project moves again.
+    [string]$Source = 'C:\Users\yrala\OneDrive\Documents\Forschung\Econometrics ML\Time series with many regressors\Latex\main.pdf'
+)
+
 $ErrorActionPreference = 'Continue'
 
 $site    = $PSScriptRoot
-$project = Split-Path $site -Parent
-$source  = Join-Path $project 'Latex/main.pdf'
-$target  = Join-Path $site 'papers/dac.pdf'
+$source  = $Source
+$target  = Join-Path $site 'papers/main.pdf'
 $page    = Join-Path $site 'research.html'
 
 function Say($msg) { Write-Host "publish-paper: $msg" }
@@ -54,7 +60,7 @@ if (-not $changed) {
 
 # --- Copy the PDF and stamp the date on the page ---------------------------
 Copy-Item $source $target -Force
-Say "copied main.pdf -> papers/dac.pdf"
+Say "copied main.pdf -> papers/main.pdf"
 
 if (Test-Path $page) {
     $stamp = (Get-Date).ToString('d MMMM yyyy', [Globalization.CultureInfo]::InvariantCulture)

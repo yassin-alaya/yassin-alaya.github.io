@@ -1,73 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Research — Yassin Alaya</title>
-<meta name="description" content="Working papers and work in progress by Yassin Alaya, Toulouse School of Economics.">
-<link rel="stylesheet" href="style.css">
-<!-- MathJax: lets you write maths in an abstract, delimited by \( ... \).
-     Delete these two lines if you never need maths on the page. -->
-<script>window.MathJax = {tex: {inlineMath: [['\\(','\\)']]}};</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-</head>
-<body>
-<div class="wrap">
-
-<header>
-  <h1 class="name"><a href="index.html">Yassin Alaya</a></h1>
-  <p class="affil">Toulouse School of Economics</p>
-  <nav>
-    <a href="index.html">About</a>
-    <a href="research.html" aria-current="page">Research</a>
-    <a href="teaching.html">Teaching</a>
-    <a href="cv.pdf">CV</a>
-  </nav>
-</header>
-
-<main>
+---
+layout: default
+title: Research
+description: >-
+  Working papers and work in progress by Yassin Alaya,
+  Toulouse School of Economics.
+mathjax: true
+---
 
   <section>
     <h2>Working papers</h2>
 
     <article class="paper">
       <h3>
-        The Divide-and-Conquer Estimator for High-Dimensional Linear Regression
+        The Divide-and-Conquer Estimator for High-Dimensional Time Series Regression
         under Weak Exogeneity
         <span class="tag">Job market paper</span>
-        <!-- TODO: change or delete the tag above. -->
       </h3>
       <!-- publish-paper.ps1 rewrites the text between the DAC_DATE
            markers on every compile. Leave them in place. -->
-      <p class="meta">Working paper. Last revised <!--DAC_DATE-->6 September 2026<!--/DAC_DATE-->.</p>
+      <p class="meta">Last revised <!--DAC_DATE-->30 October 2026<!--/DAC_DATE-->.</p>
 
       <details class="abstract-toggle" open>
         <summary>Abstract</summary>
         <p class="abstract">
-          Under weak exogeneity, ordinary least squares is inconsistent when the
-          number of regressors is proportional to the sample size and regressors
-          are autocorrelated, as shown by Mikusheva and Sølvsten (2025). Their
-          consistent estimator relies on homoskedasticity. I propose the
-          Divide-and-Conquer (DaC) estimator, which is consistent under
+          Mikusheva and Sølvsten (2025) show that ordinary least squares is
+          generally inconsistent for weakly exogenous time-series regressions
+          when the number of regressors is proportional to the sample size, and
+          propose a new estimator for high-dimensional time-series regressions.
+          Consistency of this estimator, however, relies on homoskedasticity,
+          and inference results are limited. We propose the Divide-and-Conquer
+          (DaC) estimator as an alternative. It is consistent under
           heteroskedasticity when feedback from the error term to future
           regressors has a known, finite horizon. The idea is simple: partition
           the sample into subsamples, spaced so that strict exogeneity holds
           within each, estimate OLS on every subsample, and average. The
           resulting estimator is unbiased and consistent for linear contrasts of
-          the slope in the proportional regime. Asymptotic normality and
-          consistent variance estimation are established when the number of
-          regressors grows but remains a vanishing fraction of the sample size.
-          Simulations compare DaC, OLS, and the Mikusheva–Sølvsten estimator.
+          the slope parameter when the number of regressors is proportional to
+          the sample size. Asymptotic normality in the proportional regime is
+          established and a conservative inference procedure is proposed.
+          Simulations compare the DaC estimator, OLS, and the
+          Mikusheva–Sølvsten estimator.
         </p>
       </details>
 
       <p class="links">
-        <a href="papers/dac.pdf">PDF</a>
-        <!-- Add these back once the links exist:
-        <a href="#">arXiv</a>
-        <a href="#">Slides</a>
-        <a href="#">Code</a>
-        -->
+        <a href="{{ '/papers/main.pdf' | relative_url }}">PDF</a>
+      </p>
+    </article>
+
+    <article class="paper">
+      <h3>Quadratic Voting with Vote Credits</h3>
+      <p class="meta">Last revised <!--QV_DATE-->September 2024<!--/QV_DATE-->.</p>
+
+      <details class="abstract-toggle" open>
+        <summary>Abstract</summary>
+        <p class="abstract">
+          A society faces K binary decisions to be decided through K simultaneous
+          polls using Quadratic Voting (QV) with vote credits: each voter is
+          endowed with a budget of vote credits, which she uses to buy a number
+          \(v_k\) of votes (positive or negative) on each poll k at a cost of
+          \(v_k^2\) vote credits per poll. I characterise voting equilibria as the
+          number of voters tends to infinity and compare total welfare under QV
+          with vote credits and majority voting under different preference
+          distributions. Welfare under QV relies on overall preference intensity
+          being uncorrelated with preferences on individual polls. Independent
+          preferences and a large number of polls create equality in preference
+          intensities and favours QV with credits. I present a pathological
+          example where QV decides in favour of arbitrarily small preferences.
+        </p>
+      </details>
+
+      <p class="links">
+        <a href="{{ '/papers/QV.pdf' | relative_url }}">PDF</a>
       </p>
     </article>
 
@@ -75,21 +79,36 @@
 
   <section>
     <h2>Work in progress</h2>
+
     <article class="paper">
-      <h3>Title of the next project</h3>
-      <p class="meta">Draft available on request.</p>
-      <!-- TODO: replace or delete this placeholder entry. Copy the
-           <article class="paper"> block above for a full entry with an
-           abstract and links. -->
+      <h3>
+        Consistent Estimation and Inference for High-Dimensional Time Series
+        Regressions using Principal Components Regression
+      </h3>
+
+      <details class="abstract-toggle" open>
+        <summary>Abstract</summary>
+        <p class="abstract">
+          When the number of regressors of a time series regression is large
+          relative to the sample size, OLS may have a non-negligible bias.
+          However, many high-dimensional data sets exhibit low effective
+          dimensionality in the form of spectral decay, meaning that the
+          eigenvalues of the covariance matrix of the regressors decay to zero.
+          In this paper, I show that a principal component approach to time
+          series regression can mitigate weak exogeneity bias while introducing
+          only negligible omitted variable bias when eigenvalues decay fast
+          enough.
+        </p>
+      </details>
+
+      <!-- No PDF yet: this link used to point at papers/main.pdf, which is the
+           DaC paper, not this one. Put the draft in papers/ and restore the
+           line below with the right filename. -->
+      <!--
+      <p class="links">
+        <a href="{{ '/papers/pcr.pdf' | relative_url }}">PDF</a>
+      </p>
+      -->
     </article>
+
   </section>
-
-</main>
-
-<footer>
-  <p>Last updated September 2026.</p>
-</footer>
-
-</div>
-</body>
-</html>

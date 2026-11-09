@@ -2,3 +2,8 @@
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Jekyll build output (only appears if you install Ruby and run it locally)
+_site/
+.jekyll-cache/
+.jekyll-metadata

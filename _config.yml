@@ -1,0 +1,17 @@
+# Site-wide settings. GitHub Pages reads this when it builds the site.
+# Changing this file only takes effect after a push.
+
+title: Yassin Alaya
+affiliation: Toulouse School of Economics
+description: >-
+  Yassin Alaya — econometrics, Toulouse School of Economics.
+  High-dimensional regression, time series, weak exogeneity.
+url: https://yassin-alaya.github.io
+
+# Files that are not part of the published site.
+exclude:
+  - README.md
+  - publish-paper.ps1
+  - Gemfile
+  - Gemfile.lock
+  - vendor

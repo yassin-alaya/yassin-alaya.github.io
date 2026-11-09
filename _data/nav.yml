@@ -1,0 +1,19 @@
+# The site menu. This is the ONLY place the nav is defined — add, remove or
+# reorder entries here and every page picks up the change on the next push.
+#
+# "url" must match the page's address exactly, or the menu won't know which
+# entry to highlight as the current page. The home page is "/", not
+# "/index.html".
+
+- name: About
+  url: /
+
+- name: Research
+  url: /research.html
+
+- name: Teaching
+  url: /teaching.html
+
+# Uncomment once cv.pdf is in the site folder:
+# - name: CV
+#   url: /cv.pdf
