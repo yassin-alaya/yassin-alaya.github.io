@@ -11,6 +11,26 @@
 <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
 <meta name="description" content="{{ page.description | default: site.description }}">
 
+<link rel="canonical" href="{{ page.url | replace: 'index.html', '' | absolute_url }}">
+
+{%- if page.url == "/" %}
+<!-- Tells search engines who this site is about. Not shown on the page. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ site.title }}",
+  "url": "{{ site.url }}/",
+  "jobTitle": "PhD candidate in economics",
+  "email": "mailto:yassin.alaya@tse-fr.eu",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "{{ site.affiliation }}"
+  }
+}
+</script>
+{%- endif %}
+
 <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 
 {%- if page.mathjax %}
